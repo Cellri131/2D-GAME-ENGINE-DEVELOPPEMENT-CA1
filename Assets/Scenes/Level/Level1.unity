@@ -16338,6 +16338,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 114073478}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &756931061
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 756931062}
+  - component: {fileID: 756931063}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &756931062
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756931061}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.9684299, y: 1.1076101, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2087524061}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &756931063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756931061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d99786d65c14b4e438607c52bafb54cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DynamicFriction
+  slipperyMaterial: {fileID: 6200000, guid: 52e1c63992d8a2341a4dfaaa3cb5e2c3, type: 2}
+  fullFrictionMaterial: {fileID: 6200000, guid: 8b94302e9cd12b9438916fc2c0b5966e, type: 2}
+  groundCheck: {fileID: 2087524061}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  checkRadius: 0.2
 --- !u!1 &1033447668
 GameObject:
   m_ObjectHideFlags: 0
@@ -16669,6 +16720,7 @@ GameObject:
   - component: {fileID: 2087524063}
   - component: {fileID: 2087524062}
   - component: {fileID: 2087524065}
+  - component: {fileID: 2087524066}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -16748,7 +16800,8 @@ Transform:
   m_LocalPosition: {x: -0.14859, y: -0.05258, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 756931062}
   m_Father: {fileID: 1166570472}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &2087524062
@@ -16767,7 +16820,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 965c012a74bc9e242bf75be6b1229c3c, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -16860,8 +16913,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerScript
   sprintSpeed: 3
   walkSpeed: 1
+  wallJumpForceX: 5
+  wallJumpForceY: 5
   JumpHeight: 1
   isJumping: 0
+--- !u!114 &2087524066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087524059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d99786d65c14b4e438607c52bafb54cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DynamicFriction
+  slipperyMaterial: {fileID: 0}
+  fullFrictionMaterial: {fileID: 0}
+  groundCheck: {fileID: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  checkRadius: 0.2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

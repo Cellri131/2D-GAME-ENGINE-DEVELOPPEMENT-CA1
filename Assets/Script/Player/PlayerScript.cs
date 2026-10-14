@@ -21,6 +21,13 @@ public class PlayerScript : MonoBehaviour
 
     private bool isGrounded = false;
 
+    //wall jump
+    private bool isTouchingWall = false;
+    private int wallDirection = 0; // -1 = leftwall, 1 = rightwall
+
+    public float wallJumpForceX = 5f;
+    public float wallJumpForceY = 5f;
+
     //checkpoint
     private Vector2 lastPosition;
 

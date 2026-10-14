@@ -55,14 +55,14 @@ public class PlayerScript : MonoBehaviour
 
         sprint = Keyboard.current != null && Keyboard.current.shiftKey.isPressed && move.x != 0;
 
-        //animator.SetBool("Sprint", sprint);
-        //animator.SetFloat("Move", move.x);
+        animator.SetBool("Sprint", sprint);
+        animator.SetFloat("Move", move.x);
         //animator.SetBool("isJumping", isJumping);
 
         if (move.x != 0)
         {
             direction = move.x > 0 ? 1 : -1;
-            //animator.SetInteger("Direction", direction);
+            animator.SetInteger("Direction", direction);
         }
     }
 

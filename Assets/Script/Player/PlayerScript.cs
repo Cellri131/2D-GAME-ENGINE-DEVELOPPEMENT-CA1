@@ -50,6 +50,9 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         move = InputSystem.actions["Move"].ReadValue<Vector2>();
+        // Skip all the up and down keys | Ignore complètement les touches haut/bas
+        move.y = 0;
+
         sprint = Keyboard.current != null && Keyboard.current.shiftKey.isPressed && move.x != 0;
 
         //animator.SetBool("Sprint", sprint);
@@ -65,9 +68,14 @@ public class PlayerScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 position = rb.transform.position;
         int currentSpeed = sprint ? sprintSpeed : walkSpeed;
-        position += move * currentSpeed * Time.fixedDeltaTime;
+
+        Vector2 position = rb.transform.position;
+
+        // Only the X axe | Seul l'axe X est contrôlé par le joueur
+        position.x += move.x * currentSpeed * Time.fixedDeltaTime;
+
+        // No Y axe | Le Y n'est jamais modifié ici
         rb.transform.position = position;
     }
 

@@ -132,21 +132,25 @@ public class PlayerScript : MonoBehaviour
 
         Vector2 position = rb.transform.position;
 
-        // Déplacement horizontal
-        position.x += move.x * currentSpeed * Time.fixedDeltaTime;
-
-        rb.transform.position = position;
-
-        // Rotation selon la pente
         if (isGrounded)
         {
             float angle = Vector2.SignedAngle(Vector2.up, groundNormal);
 
             rb.rotation = angle;
+
+            // Déplacement principalement horizontal
+            position.x += move.x * currentSpeed * Time.fixedDeltaTime;
+
+            // Compensation verticale pour suivre la pente
+            position.y += move.x * (-groundNormal.x) * currentSpeed * Time.fixedDeltaTime;
         }
         else
         {
             rb.rotation = 0f;
+
+            position.x += move.x * currentSpeed * Time.fixedDeltaTime;
         }
+
+        rb.transform.position = position;
     }
 }

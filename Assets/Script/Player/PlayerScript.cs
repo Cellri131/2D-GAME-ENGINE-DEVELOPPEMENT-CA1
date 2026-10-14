@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 
 public class PlayerScript : MonoBehaviour
@@ -59,12 +60,40 @@ public class PlayerScript : MonoBehaviour
         animator.SetFloat("Move", move.x);
         //animator.SetBool("isJumping", isJumping);
 
+        //jump part
+        if (InputSystem.actions["Jump"].WasPressedThisFrame())
+        {
+            if (jumpCount < jumpLimit)
+            {
+                isJumping = true;
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
+                rb.AddForce(new Vector2(0, Mathf.Sqrt(-2 * Physics2D.gravity.y * JumpHeight)), ForceMode2D.Impulse);
+                ++jumpCount;
+            }
+        }
+
+        //move part
         if (move.x != 0)
         {
             direction = move.x > 0 ? 1 : -1;
             animator.SetInteger("Direction", direction);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        foreach (ContactPoint2D contact in collision.contacts)
+        {
+            if (contact.normal.y > 0.5f)
+            {
+                isJumping = false;
+                jumpCount = 0;
+                break;
+            }
+        }
+    }
+
+
 
     private void FixedUpdate()
     {

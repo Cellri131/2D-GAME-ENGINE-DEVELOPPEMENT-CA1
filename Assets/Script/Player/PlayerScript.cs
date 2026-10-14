@@ -23,10 +23,10 @@ public class PlayerScript : MonoBehaviour
 
     //wall jump
     private bool isTouchingWall = false;
-    private int wallDirection = 0; // -1 = leftwall, 1 = rightwall
+    private int wallDirection = 0; // -1 = mur à gauche, 1 = mur à droite
 
-    public float wallJumpForceX = 5f;
-    public float wallJumpForceY = 5f;
+    public float wallJumpForceX = 8f;
+    public float wallJumpForceY = 6f;
 
     //checkpoint
     private Vector2 lastPosition;
@@ -67,21 +67,43 @@ public class PlayerScript : MonoBehaviour
         animator.SetBool("Sprint", sprint);
         animator.SetFloat("Move", move.x);
 
-        // Jump
-        if (InputSystem.actions["Jump"].WasPressedThisFrame() && isGrounded)
+        // Jump / Wall Jump
+        if (InputSystem.actions["Jump"].WasPressedThisFrame())
         {
-            isJumping = true;
-            isGrounded = false;
+            // Saut normal
+            if (isGrounded)
+            {
+                isJumping = true;
+                isGrounded = false;
 
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
+                rb.linearVelocity = new Vector2(
+                    rb.linearVelocity.x,
+                    0f
+                );
 
-            rb.AddForce(
-                new Vector2(
-                    0,
-                    Mathf.Sqrt(-2 * Physics2D.gravity.y * JumpHeight)
-                ),
-                ForceMode2D.Impulse
-            );
+                rb.AddForce(
+                    new Vector2(
+                        0,
+                        Mathf.Sqrt(-2 * Physics2D.gravity.y * JumpHeight)
+                    ),
+                    ForceMode2D.Impulse
+                );
+            }
+            // Wall Jump
+            else if (isTouchingWall)
+            {
+                isJumping = true;
+
+                rb.linearVelocity = Vector2.zero;
+
+                rb.AddForce(
+                    new Vector2(
+                        -wallDirection * wallJumpForceX,
+                        wallJumpForceY
+                    ),
+                    ForceMode2D.Impulse
+                );
+            }
         }
 
         // Direction
@@ -93,29 +115,60 @@ public class PlayerScript : MonoBehaviour
     }
 
     #region Collision
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         foreach (ContactPoint2D contact in collision.contacts)
         {
+            // Sol
             if (contact.normal.y > 0.5f)
             {
                 isGrounded = true;
                 isJumping = false;
                 groundNormal = contact.normal;
-                break;
+            }
+
+            // Mur à droite
+            if (contact.normal.x < -0.5f)
+            {
+                isTouchingWall = true;
+                wallDirection = 1;
+            }
+
+            // Mur à gauche
+            if (contact.normal.x > 0.5f)
+            {
+                isTouchingWall = true;
+                wallDirection = -1;
             }
         }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
+        isTouchingWall = false;
+
         foreach (ContactPoint2D contact in collision.contacts)
         {
+            // Sol / Pentes
             if (contact.normal.y > 0.1f)
             {
                 isGrounded = true;
                 groundNormal = contact.normal;
-                return;
+            }
+
+            // Mur à droite
+            if (contact.normal.x < -0.5f)
+            {
+                isTouchingWall = true;
+                wallDirection = 1;
+            }
+
+            // Mur à gauche
+            if (contact.normal.x > 0.5f)
+            {
+                isTouchingWall = true;
+                wallDirection = -1;
             }
         }
     }
@@ -123,7 +176,9 @@ public class PlayerScript : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         isGrounded = false;
+        isTouchingWall = false;
     }
+
     #endregion
 
     private void FixedUpdate()
@@ -138,7 +193,7 @@ public class PlayerScript : MonoBehaviour
 
             rb.rotation = angle;
 
-            // Déplacement principalement horizontal
+            // Déplacement horizontal
             position.x += move.x * currentSpeed * Time.fixedDeltaTime;
 
             // Compensation verticale pour suivre la pente

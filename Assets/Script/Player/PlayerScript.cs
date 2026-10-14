@@ -85,6 +85,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    #region Collision
     private void OnCollisionEnter2D(Collision2D collision)
     {
         foreach (ContactPoint2D contact in collision.contacts)
@@ -116,6 +117,7 @@ public class PlayerScript : MonoBehaviour
     {
         isGrounded = false;
     }
+    #endregion
 
     private void FixedUpdate()
     {

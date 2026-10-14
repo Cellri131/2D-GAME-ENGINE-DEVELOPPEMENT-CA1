@@ -15,6 +15,18 @@ MonoBehaviour:
   m_TextureSources:
   - m_Texture: {fileID: 2800000, guid: 2a0527d55815adf439e06ce703076484, type: 3}
     m_TileTemplate: {fileID: 0}
+  - m_Texture: {fileID: 2800000, guid: f61212e3cd2b3fb4db26e3a8804ab2c7, type: 3}
+    m_TileTemplate: {fileID: 0}
+  - m_Texture: {fileID: 2800000, guid: 59191562cc6658e409f211ca0c45e232, type: 3}
+    m_TileTemplate: {fileID: 0}
+  - m_Texture: {fileID: 2800000, guid: 7772aad2f151bc443a3526e3d77ac540, type: 3}
+    m_TileTemplate: {fileID: 0}
+  - m_Texture: {fileID: 2800000, guid: fa55be0f40b72d74da3081e220a4c06f, type: 3}
+    m_TileTemplate: {fileID: 0}
+  - m_Texture: {fileID: 2800000, guid: a88f7105cd20d654bb62c2e425048eaf, type: 3}
+    m_TileTemplate: {fileID: 0}
+  - m_Texture: {fileID: 2800000, guid: c8bab853db04cd44db3a629b3d418432, type: 3}
+    m_TileTemplate: {fileID: 0}
   m_CreateAtlas: 1
   m_ScriptablePacker: {fileID: 0}
   m_CellLayout: 0
@@ -57,7 +69,13 @@ SpriteAtlas:
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
+    - {fileID: 2800000, guid: f61212e3cd2b3fb4db26e3a8804ab2c7, type: 3}
     - {fileID: 2800000, guid: 2a0527d55815adf439e06ce703076484, type: 3}
+    - {fileID: 2800000, guid: 59191562cc6658e409f211ca0c45e232, type: 3}
+    - {fileID: 2800000, guid: 7772aad2f151bc443a3526e3d77ac540, type: 3}
+    - {fileID: 2800000, guid: fa55be0f40b72d74da3081e220a4c06f, type: 3}
+    - {fileID: 2800000, guid: a88f7105cd20d654bb62c2e425048eaf, type: 3}
+    - {fileID: 2800000, guid: c8bab853db04cd44db3a629b3d418432, type: 3}
     bindAsDefault: 1
     isAtlasV2: 1
     cachedData: {fileID: 0}

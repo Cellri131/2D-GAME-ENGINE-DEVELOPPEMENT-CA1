@@ -18,6 +18,7 @@ public class PlayerScript : MonoBehaviour
     private bool sprint = false;
     public int sprintSpeed = 6;
     public int walkSpeed = 3;
+    private bool isGrounded = false;
 
     //checkpoint
     private Vector2 lastPosition;
@@ -29,8 +30,8 @@ public class PlayerScript : MonoBehaviour
         public int JumpHeight = 1;
         public bool isJumping = false;
         //we will need jumpCount after for the wall jump possibility
-        private int jumpCount = 0;
-        public int jumpLimit = 1;
+        //private int jumpCount = 0;
+        //public int jumpLimit = 1;
 
     //for the live it's only one but with chekcpoint, you died you restart everything, no death screen at the moment
     private int lives = 1;
@@ -61,15 +62,17 @@ public class PlayerScript : MonoBehaviour
         //animator.SetBool("isJumping", isJumping);
 
         //jump part
-        if (InputSystem.actions["Jump"].WasPressedThisFrame())
+        if (InputSystem.actions["Jump"].WasPressedThisFrame() && isGrounded)
         {
-            if (jumpCount < jumpLimit)
-            {
-                isJumping = true;
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
-                rb.AddForce(new Vector2(0, Mathf.Sqrt(-2 * Physics2D.gravity.y * JumpHeight)), ForceMode2D.Impulse);
-                ++jumpCount;
-            }
+            isJumping = true;
+            isGrounded = false;
+
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
+
+            rb.AddForce(
+                new Vector2(0, Mathf.Sqrt(-2 * Physics2D.gravity.y * JumpHeight)),
+                ForceMode2D.Impulse
+            );
         }
 
         //move part
@@ -86,11 +89,16 @@ public class PlayerScript : MonoBehaviour
         {
             if (contact.normal.y > 0.5f)
             {
+                isGrounded = true;
                 isJumping = false;
-                jumpCount = 0;
                 break;
             }
         }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        isGrounded = false;
     }
 
 

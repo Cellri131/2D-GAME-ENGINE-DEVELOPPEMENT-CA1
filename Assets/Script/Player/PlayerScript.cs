@@ -62,4 +62,14 @@ public class PlayerScript : MonoBehaviour
             //animator.SetInteger("Direction", direction);
         }
     }
+
+    private void FixedUpdate()
+    {
+        Vector2 position = rb.transform.position;
+        int currentSpeed = sprint ? sprintSpeed : walkSpeed;
+        position += move * currentSpeed * Time.fixedDeltaTime;
+        rb.transform.position = position;
+    }
+
+
 }

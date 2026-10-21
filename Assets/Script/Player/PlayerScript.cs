@@ -135,7 +135,7 @@ public class PlayerScript : MonoBehaviour
         int currentSpeed = sprint ? sprintSpeed : walkSpeed;
 
         Vector2 position = rb.transform.position;
-
+        
         if (isGrounded)
         {
             Vector2 slopeDirection = new Vector2(
@@ -150,18 +150,19 @@ public class PlayerScript : MonoBehaviour
             position.x += move.x * currentSpeed * Time.fixedDeltaTime;
         }
 
-        rb.transform.position = position;
-
+        /*
         // Rotation selon la pente
-        //if (isGrounded)
-        //{
-        //    float angle = Vector2.SignedAngle(Vector2.up, groundNormal);
+        if (isGrounded)
+        {
+        
+            float angle = Vector2.SignedAngle(Vector2.up, groundNormal);
 
-//            rb.MoveRotation(angle);
-  //      }
-    //    else
-      //  {
-        //    rb.rotation = 0f;
-        //}
+            rb.MoveRotation(angle);
+        }
+        else
+        {
+            rb.rotation = 0f;
+        }*/
+        rb.transform.position = position;
     }
 }

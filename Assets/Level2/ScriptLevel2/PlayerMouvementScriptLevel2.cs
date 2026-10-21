@@ -14,6 +14,9 @@ public class PlayerMouvementScriptLevel2 : MonoBehaviour
 
     private float mx;
 
+    // Pente
+    private Vector2 groundNormal = Vector2.up;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -22,6 +25,7 @@ public class PlayerMouvementScriptLevel2 : MonoBehaviour
     private void Update()
     {
         mx = Input.GetAxisRaw("Horizontal");
+
         if (Input.GetButtonDown("Jump") && IsGrounded())
             Jump();
 
@@ -44,6 +48,33 @@ public class PlayerMouvementScriptLevel2 : MonoBehaviour
             mx * movementSpeed,
             rb.linearVelocity.y
         );
+
+        HandleSlopeRotation();
+    }
+
+    private void HandleSlopeRotation()
+    {
+        if (!IsGrounded())
+        {
+            transform.rotation = Quaternion.identity;
+            return;
+        }
+
+        RaycastHit2D hit = Physics2D.Raycast(
+            feet.position,
+            Vector2.down,
+            1f,
+            groundLayers
+        );
+
+        if (hit.collider != null)
+        {
+            groundNormal = hit.normal;
+
+            float angle = Vector2.SignedAngle(Vector2.up, groundNormal);
+
+            transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        }
     }
 
     void Jump()
@@ -56,11 +87,14 @@ public class PlayerMouvementScriptLevel2 : MonoBehaviour
 
     public bool IsGrounded()
     {
-        Collider2D groundCheck = Physics2D.OverlapCircle(feet.position, 0.5f, groundLayers);
+        Collider2D groundCheck = Physics2D.OverlapCircle(
+            feet.position,
+            0.9f,
+            groundLayers
+        );
 
-        if (groundCheck != null)
-            return true;
-
-        return false;
+        return groundCheck != null;
     }
+
+
 }

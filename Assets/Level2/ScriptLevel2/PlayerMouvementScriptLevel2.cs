@@ -39,6 +39,7 @@ public class PlayerMouvementScriptLevel2 : MonoBehaviour
         else if (mx < 0f)
             transform.localScale = new Vector3(-1f, 1f, 1f);
 
+        anim.SetBool("IsRunning", true);
         anim.SetBool("IsGrounded", IsGrounded());
     }
 
@@ -51,6 +52,8 @@ public class PlayerMouvementScriptLevel2 : MonoBehaviour
 
         HandleSlopeRotation();
     }
+
+
 
     private void HandleSlopeRotation()
     {
@@ -84,6 +87,8 @@ public class PlayerMouvementScriptLevel2 : MonoBehaviour
             jumpForce
         );
     }
+
+
 
     public bool IsGrounded()
     {

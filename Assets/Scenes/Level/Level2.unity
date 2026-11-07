@@ -301,7 +301,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c4a5fd0b5f96cc46bddb28c1d4714be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  movementSpeed: 50
+  movementSpeed: 5
+  sprintSpeed: 5
   rb: {fileID: 969389556}
   anim: {fileID: 969389559}
   jumpForce: 20

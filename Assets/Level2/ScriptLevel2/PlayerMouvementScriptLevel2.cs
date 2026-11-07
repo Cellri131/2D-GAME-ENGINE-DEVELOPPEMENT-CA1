@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class PlayerMouvementScriptLevel2 : MonoBehaviour
 {
+    #region Variables
     public float movementSpeed = 5f;
+    public float sprintSpeed = 5f;
     public Rigidbody2D rb;
 
     public Animator anim;
@@ -12,10 +14,12 @@ public class PlayerMouvementScriptLevel2 : MonoBehaviour
 
     public LayerMask groundLayers;
 
+    bool isBouncing = false;
     private float mx;
 
     // Pente
     private Vector2 groundNormal = Vector2.up;
+    #endregion
 
     private void Awake()
     {
@@ -24,7 +28,21 @@ public class PlayerMouvementScriptLevel2 : MonoBehaviour
 
     private void Update()
     {
-        mx = Input.GetAxisRaw("Horizontal");
+
+            mx = Input.GetAxisRaw("Horizontal");
+
+
+        /*
+        if (Input.GetButtonDown("Sprint"))
+        {
+            movementSpeed += sprintSpeed;
+            anim.SetBool("IsRunning", true);
+        }
+        else
+        {
+            movementSpeed -= sprintSpeed;
+            anim.SetBool("IsRunning", false);
+        }*/
 
         if (Input.GetButtonDown("Jump") && IsGrounded())
             Jump();
@@ -45,10 +63,11 @@ public class PlayerMouvementScriptLevel2 : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(
-            mx * movementSpeed,
-            rb.linearVelocity.y
-        );
+        if (mx != 0)
+            rb.linearVelocity = new Vector2(
+                mx * movementSpeed,
+                rb.linearVelocity.y
+            );
 
         HandleSlopeRotation();
     }
@@ -73,12 +92,15 @@ public class PlayerMouvementScriptLevel2 : MonoBehaviour
         if (hit.collider != null)
         {
             groundNormal = hit.normal;
-
+            mx *= -1;
+            isJumping = true;
             float angle = Vector2.SignedAngle(Vector2.up, groundNormal);
 
             transform.rotation = Quaternion.Euler(0f, 0f, angle);
         }
     }
+
+    bool isJumping = false;
 
     void Jump()
     {
@@ -100,6 +122,17 @@ public class PlayerMouvementScriptLevel2 : MonoBehaviour
 
         return groundCheck != null;
     }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("bounce");
+        ContactPoint2D contact = collision.contacts[0];
+        Vector2 bounceDirection = contact.normal;
+
+        rb.linearVelocity = bounceDirection * 2;
+    }
+
+
 
 
 }

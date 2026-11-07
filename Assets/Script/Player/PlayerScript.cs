@@ -34,6 +34,8 @@ public class PlayerScript : MonoBehaviour
     private Vector2 lastVelocity;
     private float bounceTimer;
     public float bounceLockTime = 0.3f;
+    // Les surfaces dont la normale a un y au-dessus de cette valeur (rampes) ne font pas rebondir
+    public float maxWallNormalY = 0.5f;
     private bool sprint;
 
     private void Update()
@@ -121,7 +123,7 @@ public class PlayerScript : MonoBehaviour
         for (int i = 0; i < collision.contactCount; i++)
         {
             ContactPoint2D contact = collision.GetContact(i);
-            if (Mathf.Abs(contact.normal.x) <= Mathf.Abs(contact.normal.y))
+            if (Mathf.Abs(contact.normal.y) > maxWallNormalY)
                 continue;
 
             float xSpeed = Mathf.Max(Mathf.Abs(lastVelocity.x), movementSpeed);

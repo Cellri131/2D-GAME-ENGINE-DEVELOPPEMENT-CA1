@@ -43,6 +43,24 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Sky_Background
+    uniqueID: 3228392653
+    locked: 0
+  - name: City_Distant
+    uniqueID: 1375995381
+    locked: 0
+  - name: City_Mid_Far
+    uniqueID: 1157343933
+    locked: 0
+  - name: City_Mid_Close
+    uniqueID: 1952699179
+    locked: 0
+  - name: City_Foreground
+    uniqueID: 1655314735
+    locked: 0
+  - name: Player_And_Ground
+    uniqueID: 2730719571
+    locked: 0
   m_RenderingLayers:
   - Default
   m_MigratedRenderPipelines: []

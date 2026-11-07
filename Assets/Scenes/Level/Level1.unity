@@ -18448,6 +18448,7 @@ GameObject:
   m_Component:
   - component: {fileID: 339898524}
   - component: {fileID: 339898525}
+  - component: {fileID: 339898526}
   m_Layer: 0
   m_Name: 3_0
   m_TagString: Untagged
@@ -18530,6 +18531,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!114 &339898526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339898523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8171df56d2467408efc296b2735808, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InfiniteParallax
+  cameraTransform: {fileID: 519420032}
+  parallaxFactor: 0.6
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -18818,6 +18833,7 @@ GameObject:
   m_Component:
   - component: {fileID: 777018709}
   - component: {fileID: 777018710}
+  - component: {fileID: 777018711}
   m_Layer: 0
   m_Name: 2_0
   m_TagString: Untagged
@@ -18900,6 +18916,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!114 &777018711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777018708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8171df56d2467408efc296b2735808, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InfiniteParallax
+  cameraTransform: {fileID: 519420032}
+  parallaxFactor: 0.8
 --- !u!1 &800764968
 GameObject:
   m_ObjectHideFlags: 0
@@ -18910,6 +18940,7 @@ GameObject:
   m_Component:
   - component: {fileID: 800764969}
   - component: {fileID: 800764970}
+  - component: {fileID: 800764971}
   m_Layer: 0
   m_Name: 1_0
   m_TagString: Untagged
@@ -18992,6 +19023,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!114 &800764971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800764968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8171df56d2467408efc296b2735808, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InfiniteParallax
+  cameraTransform: {fileID: 519420032}
+  parallaxFactor: 0.95
 --- !u!1 &899059633
 GameObject:
   m_ObjectHideFlags: 0
@@ -19002,6 +19047,7 @@ GameObject:
   m_Component:
   - component: {fileID: 899059634}
   - component: {fileID: 899059635}
+  - component: {fileID: 899059636}
   m_Layer: 0
   m_Name: 5_0
   m_TagString: Untagged
@@ -19084,6 +19130,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!114 &899059636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899059633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8171df56d2467408efc296b2735808, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InfiniteParallax
+  cameraTransform: {fileID: 519420032}
+  parallaxFactor: 0.1
 --- !u!1 &989859699
 GameObject:
   m_ObjectHideFlags: 0
@@ -35530,6 +35590,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1571933428}
   - component: {fileID: 1571933429}
+  - component: {fileID: 1571933430}
   m_Layer: 0
   m_Name: 4_0
   m_TagString: Untagged
@@ -35612,6 +35673,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!114 &1571933430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571933427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8171df56d2467408efc296b2735808, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InfiniteParallax
+  cameraTransform: {fileID: 519420032}
+  parallaxFactor: 0.35
 --- !u!1 &1796500587
 GameObject:
   m_ObjectHideFlags: 0

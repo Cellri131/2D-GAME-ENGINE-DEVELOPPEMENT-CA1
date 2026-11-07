@@ -26,56 +26,51 @@ public class PlayerScript : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
     }
+
+    private int direction = 1;
+    private Vector2 lastVelocity;
+    private float bounceTimer;
+    public float bounceLockTime = 0.3f;
+    private bool sprint;
 
     private void Update()
     {
-
         mx = Input.GetAxisRaw("Horizontal");
+        sprint = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
 
+        bool grounded = IsGrounded();
 
-        /*
-        if (Input.GetButtonDown("Sprint"))
-        {
-            movementSpeed += sprintSpeed;
-            anim.SetBool("IsRunning", true);
-        }
-        else
-        {
-            movementSpeed -= sprintSpeed;
-            anim.SetBool("IsRunning", false);
-        }*/
-
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if ((Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.UpArrow)) && grounded)
             Jump();
 
-        if (Mathf.Abs(mx) > 0.05f)
-            anim.SetBool("IsWalking", true);
-        else
-            anim.SetBool("IsWalking", false);
+        if (mx > 0.05f)
+            direction = 1;
+        else if (mx < -0.05f)
+            direction = -1;
 
-        if (mx > 0f)
-            transform.localScale = new Vector3(1f, 1f, 1f);
-        else if (mx < 0f)
-            transform.localScale = new Vector3(-1f, 1f, 1f);
-
-        anim.SetBool("IsRunning", true);
-        anim.SetBool("IsGrounded", IsGrounded());
+        anim.SetFloat("Move", Mathf.Abs(mx) > 0.05f ? mx : 0f);
+        anim.SetInteger("Direction", direction);
+        anim.SetBool("Sprint", sprint && Mathf.Abs(mx) > 0.05f);
+        anim.SetBool("isJumping", !grounded);
     }
 
     private void FixedUpdate()
     {
-        if (mx != 0)
-            rb.linearVelocity = new Vector2(
-                mx * movementSpeed,
-                rb.linearVelocity.y
-            );
+        if (bounceTimer > 0f)
+            bounceTimer -= Time.fixedDeltaTime;
+        else
+        {
+            float speed = sprint ? movementSpeed + sprintSpeed : movementSpeed;
+            rb.linearVelocity = new Vector2(mx * speed, rb.linearVelocity.y);
+        }
+
+        lastVelocity = rb.linearVelocity;
 
         HandleSlopeRotation();
     }
-
-
-
     private void HandleSlopeRotation()
     {
         if (!IsGrounded())
@@ -94,15 +89,11 @@ public class PlayerScript : MonoBehaviour
         if (hit.collider != null)
         {
             groundNormal = hit.normal;
-            mx *= -1;
-            isJumping = true;
             float angle = Vector2.SignedAngle(Vector2.up, groundNormal);
 
             transform.rotation = Quaternion.Euler(0f, 0f, angle);
         }
     }
-
-    bool isJumping = false;
 
     void Jump()
     {
@@ -133,8 +124,9 @@ public class PlayerScript : MonoBehaviour
             if (Mathf.Abs(contact.normal.x) <= Mathf.Abs(contact.normal.y))
                 continue;
 
-            Debug.Log("bounce");
-            rb.linearVelocity = contact.normal * 2f;
+            float xSpeed = Mathf.Max(Mathf.Abs(lastVelocity.x), movementSpeed);
+            rb.linearVelocity = new Vector2(Mathf.Sign(contact.normal.x) * xSpeed, lastVelocity.y);
+            bounceTimer = bounceLockTime;
             return;
         }
     }

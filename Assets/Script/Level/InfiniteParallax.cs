@@ -16,6 +16,10 @@ public class InfiniteParallax : MonoBehaviour
     [Tooltip("ON: the layer follows the camera vertically (keeps its editor offset). OFF: vertical parallax using the factor.")]
     public bool followVertically = true;
 
+    [Header("Auto Scroll")]
+    [Tooltip("Constant horizontal speed. Negative values move left, positive values move right.")]
+    public float autoScrollSpeed = 0f;
+
     private float textureUnitSizeX;
     private Vector3 lastCameraPosition;
     private Vector2 editorOffsetFromCamera;
@@ -64,14 +68,16 @@ public class InfiniteParallax : MonoBehaviour
         Vector3 delta = camPos - lastCameraPosition;
         lastCameraPosition = camPos;
 
-        transform.position += new Vector3(delta.x * invertedFactor, 0f, 0f);
+        // Calculate camera parallax movement + constant auto-scroll movement
+        float autoMoveX = autoScrollSpeed * Time.deltaTime;
+        transform.position += new Vector3((delta.x * invertedFactor) + autoMoveX, 0f, 0f);
 
         if (followVertically)
             transform.position = new Vector3(transform.position.x, camPos.y + editorOffsetFromCamera.y, transform.position.z);
         else
             transform.position += new Vector3(0f, delta.y * invertedFactor, 0f);
 
-        // Horizontal infinite scrolling
+        // Horizontal infinite scrolling (automatically handles both camera movement and auto-scroll)
         float diff = camPos.x - (transform.position.x - editorOffsetFromCamera.x);
         if (textureUnitSizeX > 0f && Mathf.Abs(diff) >= textureUnitSizeX)
         {

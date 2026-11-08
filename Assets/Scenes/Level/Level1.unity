@@ -18545,6 +18545,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InfiniteParallax
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.6
+  settleFrames: 10
+  followVertically: 1
+  autoScrollSpeed: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -18677,7 +18680,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16.019, y: 4.943, z: -10}
+  m_LocalPosition: {x: 0.07934162, y: -0.014620002, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18823,6 +18826,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 114073478}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &764545964
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 764545965}
+  m_Layer: 0
+  m_Name: PartInteractive
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &764545965
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764545964}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.11317, y: -0.26925, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2089777223}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &777018708
 GameObject:
   m_ObjectHideFlags: 0
@@ -18930,6 +18965,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InfiniteParallax
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.8
+  settleFrames: 10
+  followVertically: 1
+  autoScrollSpeed: 0
 --- !u!1 &800764968
 GameObject:
   m_ObjectHideFlags: 0
@@ -19037,6 +19075,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InfiniteParallax
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.95
+  settleFrames: 10
+  followVertically: 1
+  autoScrollSpeed: -0.5
 --- !u!1 &899059633
 GameObject:
   m_ObjectHideFlags: 0
@@ -19144,6 +19185,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InfiniteParallax
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.1
+  settleFrames: 10
+  followVertically: 1
+  autoScrollSpeed: 0
 --- !u!1 &989859699
 GameObject:
   m_ObjectHideFlags: 0
@@ -35687,6 +35731,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InfiniteParallax
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.35
+  settleFrames: 10
+  followVertically: 1
+  autoScrollSpeed: 0
 --- !u!1 &1796500587
 GameObject:
   m_ObjectHideFlags: 0
@@ -35977,7 +36024,7 @@ Transform:
   m_GameObject: {fileID: 2038152753}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16.019, y: 4.943, z: -10}
+  m_LocalPosition: {x: 0.06999999, y: -0.27, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -36093,7 +36140,7 @@ Transform:
   m_GameObject: {fileID: 2087524059}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16.019, y: 4.943, z: 0}
+  m_LocalPosition: {x: 0.07, y: -0.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -36209,6 +36256,37 @@ CapsuleCollider2D:
   m_Offset: {x: 0.00029373265, y: 0.00783594}
   m_Size: {x: 0.30210787, y: 0.18657252}
   m_Direction: 1
+--- !u!1 &2089777222
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2089777223}
+  m_Layer: 0
+  m_Name: Cans
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2089777223
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089777222}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 764545965}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -36218,3 +36296,4 @@ SceneRoots:
   - {fileID: 1166570472}
   - {fileID: 1043193876}
   - {fileID: 989859701}
+  - {fileID: 764545965}

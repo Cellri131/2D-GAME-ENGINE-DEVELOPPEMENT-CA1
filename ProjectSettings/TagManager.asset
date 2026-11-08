@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Object
   - Checkpoint
+  - Enemie
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - PlayerLayer
   - Object
   - Ground
-  - 
+  - Enemie
   - 
   - 
   - 
@@ -65,6 +66,9 @@ TagManager:
     locked: 0
   - name: Object
     uniqueID: 3683754083
+    locked: 0
+  - name: Enemie
+    uniqueID: 11184207
     locked: 0
   m_RenderingLayers:
   - Default

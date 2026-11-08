@@ -143,6 +143,9 @@ public class PlayerScript : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.collider.GetComponentInParent<Enemie>() != null)
+            return;
+
         for (int i = 0; i < collision.contactCount; i++)
         {
             ContactPoint2D contact = collision.GetContact(i);
@@ -157,13 +160,20 @@ public class PlayerScript : MonoBehaviour
 
         if (collision.gameObject.tag == "Vilan")
         {
-            lives--;
-            Debug.Log(lives);
-            // gameManager.UpdateLives(lives);
-            rb.transform.position = lastPosition;
-            if (lives == 0)
-                SceneManager.LoadScene("MenuScene");
+            TakeDamage();
         }
+    }
+
+    public void TakeDamage()
+    {
+        lives--;
+        Debug.Log(lives);
+        // gameManager.UpdateLives(lives);
+        rb.position = lastPosition;
+        rb.linearVelocity = Vector2.zero;
+        bounceTimer = 0f;
+        if (lives <= 0)
+            SceneManager.LoadScene("Menu");
     }
 
     public void OnTriggerEnter2D(Collider2D other)

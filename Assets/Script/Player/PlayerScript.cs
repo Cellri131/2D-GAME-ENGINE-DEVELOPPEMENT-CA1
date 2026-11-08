@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -158,7 +159,7 @@ public class PlayerScript : MonoBehaviour
         {
             lives--;
             Debug.Log(lives);
-            gameManager.UpdateLives(lives);
+            // gameManager.UpdateLives(lives);
             rb.transform.position = lastPosition;
             if (lives == 0)
                 SceneManager.LoadScene("MenuScene");
@@ -167,6 +168,7 @@ public class PlayerScript : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
+        Collider2D collision = other;
         if(collision.gameObject.tag == "Checkpoint")
         {
             lastPosition = collision.transform.position;

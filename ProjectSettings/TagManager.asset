@@ -9,6 +9,7 @@ TagManager:
   - Object
   - Checkpoint
   - Enemie
+  - Actions
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Object
   - Ground
   - Enemie
-  - 
+  - Actions
   - 
   - 
   - 
@@ -61,11 +62,11 @@ TagManager:
   - name: City_Foreground
     uniqueID: 1655314735
     locked: 0
-  - name: Player_And_Ground
-    uniqueID: 2730719571
-    locked: 0
   - name: Object
     uniqueID: 3683754083
+    locked: 0
+  - name: Player_And_Ground
+    uniqueID: 2730719571
     locked: 0
   - name: Enemie
     uniqueID: 11184207

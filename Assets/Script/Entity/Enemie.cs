@@ -12,6 +12,7 @@ public class Enemie : MonoBehaviour
     private Transform[] path;
     private int nextPoint;
     private bool pathIsValid;
+    private bool isActivated;
 
     private void Awake()
     {
@@ -51,7 +52,7 @@ public class Enemie : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!pathIsValid)
+        if (!isActivated || !pathIsValid)
             return;
 
         Vector2 target = path[nextPoint].position;
@@ -60,6 +61,11 @@ public class Enemie : MonoBehaviour
 
         if (position == target)
             nextPoint = (nextPoint + 1) % path.Length;
+    }
+
+    public void Activate()
+    {
+        isActivated = true;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

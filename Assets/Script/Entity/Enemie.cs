@@ -68,6 +68,13 @@ public class Enemie : MonoBehaviour
         isActivated = true;
     }
 
+    public void ReturnToStart()
+    {
+        rb.position = initialPosition;
+        rb.linearVelocity = Vector2.zero;
+        nextPoint = 0;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         HandleContact(collision.collider);
@@ -84,9 +91,7 @@ public class Enemie : MonoBehaviour
         if (player == null)
             return;
 
-        rb.position = initialPosition;
-        rb.linearVelocity = Vector2.zero;
-        nextPoint = 0;
+        ReturnToStart();
         player.TakeDamage();
     }
 }

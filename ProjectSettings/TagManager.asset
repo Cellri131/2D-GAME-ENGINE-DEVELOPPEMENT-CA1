@@ -7,6 +7,7 @@ TagManager:
   - Tileset
   - Ground
   - Object
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

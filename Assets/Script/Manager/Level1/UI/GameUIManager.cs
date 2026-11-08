@@ -8,6 +8,7 @@ public class GameUIManager : MonoBehaviour
     [Header("UI Text References")]
     public TextMeshProUGUI collectibleText;
     public TextMeshProUGUI livesText;
+    public TextMeshProUGUI speedText;
 
     void Awake()
     {
@@ -34,6 +35,15 @@ public class GameUIManager : MonoBehaviour
         if (collectibleText != null)
         {
             collectibleText.text = currentCollectibles.ToString();
+        }
+    }
+
+    public void UpdateSpeed(float speedMultiplier)
+    {
+        if (speedText != null)
+        {
+            // Formats the float to 1 decimal place (e.g., "x1.2")
+            speedText.text = "x" + speedMultiplier.ToString("F1");
         }
     }
 }

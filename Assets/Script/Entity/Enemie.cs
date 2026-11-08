@@ -14,6 +14,8 @@ public class Enemie : MonoBehaviour
     private bool pathIsValid;
     private bool isActivated;
 
+    public bool IsActivated => isActivated;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();

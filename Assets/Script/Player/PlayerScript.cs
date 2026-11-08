@@ -35,8 +35,7 @@ public class PlayerScript : MonoBehaviour
     private Vector2 lastPosition;
 
     private int lives = 3;
-
-    // private GameManager gameManager;
+    private LevelAudio levelAudio;
     
     #endregion
 
@@ -46,6 +45,7 @@ public class PlayerScript : MonoBehaviour
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
         lastPosition = rb.transform.position;
+        levelAudio = GetComponent<LevelAudio>();
     }
 
     private void Start()
@@ -55,6 +55,7 @@ public class PlayerScript : MonoBehaviour
         {
             GameUIManager.Instance.UpdateLives(lives);
             GameUIManager.Instance.UpdateCollectibles(collectibleCount);
+            GameUIManager.Instance.UpdateSpeed(SpeedMultiplier);
         }
     }
 
@@ -127,10 +128,13 @@ public class PlayerScript : MonoBehaviour
     public void AddCollectible()
     {
         collectibleCount++;
+        if (levelAudio != null)
+            levelAudio.PlayCollectible();
 
         // Update UI collectible counter
         if (GameUIManager.Instance != null)
         {
+            GameUIManager.Instance.UpdateSpeed(SpeedMultiplier);
             GameUIManager.Instance.UpdateCollectibles(collectibleCount);
         }
     }
@@ -184,6 +188,8 @@ public class PlayerScript : MonoBehaviour
     public void TakeDamage()
     {
         lives--;
+        if (levelAudio != null)
+            levelAudio.PlayHit(lives <= 0);
         Debug.Log(lives);
 
         if (GameUIManager.Instance != null)

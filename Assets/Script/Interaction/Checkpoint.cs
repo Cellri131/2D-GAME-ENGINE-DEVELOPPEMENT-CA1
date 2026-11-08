@@ -28,6 +28,7 @@ public class Checkpoint : MonoBehaviour
     {
         if (other.GetComponentInParent<PlayerScript>() != null)
             Hit();
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

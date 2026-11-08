@@ -29,6 +29,13 @@ public class PlayerScript : MonoBehaviour
     // Les surfaces dont la normale a un y au-dessus de cette valeur (rampes) ne font pas rebondir
     public float maxWallNormalY = 0.5f;
     private bool sprint;
+
+    // hp part
+    private Vector2 lastPosition;
+
+    private int lives = 3;
+
+    // private GameManager gameManager;
     
     #endregion
 
@@ -37,6 +44,7 @@ public class PlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+        lastPosition = rb.transform.position;
     }
 
     private void Update()
@@ -144,6 +152,25 @@ public class PlayerScript : MonoBehaviour
             rb.linearVelocity = new Vector2(Mathf.Sign(contact.normal.x) * xSpeed, lastVelocity.y);
             bounceTimer = bounceLockTime;
             return;
+        }
+
+        if (collision.gameObject.tag == "Vilan")
+        {
+            lives--;
+            Debug.Log(lives);
+            gameManager.UpdateLives(lives);
+            rb.transform.position = lastPosition;
+            if (lives == 0)
+                SceneManager.LoadScene("MenuScene");
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if(collision.gameObject.tag == "Checkpoint")
+        {
+            lastPosition = collision.transform.position;
+            collision.gameObject.GetComponent<Checkpoint>().Hit();
         }
     }
 }

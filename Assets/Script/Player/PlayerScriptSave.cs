@@ -62,7 +62,7 @@ namespace Assets.Script.Player
         {
             move = InputSystem.actions["Move"].ReadValue<Vector2>();
 
-            // Ignore les touches haut/bas
+            // Ignore the up and down keys.
             move.y = 0;
 
             sprint = Keyboard.current != null
@@ -154,7 +154,7 @@ namespace Assets.Script.Player
             }
 
             /*
-            // Rotation selon la pente
+            // Rotate according to the slope.
             if (isGrounded)
             {
 

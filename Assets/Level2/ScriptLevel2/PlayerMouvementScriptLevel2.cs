@@ -17,7 +17,7 @@ public class PlayerMouvementScriptLevel2 : MonoBehaviour
     bool isBouncing = false;
     private float mx;
 
-    // Pente
+    // Slope
     private Vector2 groundNormal = Vector2.up;
     #endregion
 

@@ -20,14 +20,14 @@ public class PlayerScript : MonoBehaviour
     bool isBouncing = false;
     private float mx;
 
-    // Pente
+    // Slope
     private Vector2 groundNormal = Vector2.up;
 
     private int direction = 1;
     private Vector2 lastVelocity;
     private float bounceTimer;
     public float bounceLockTime = 0.3f;
-    // Les surfaces dont la normale a un y au-dessus de cette valeur (rampes) ne font pas rebondir
+    // Surfaces with a normal Y above this value (slopes) do not cause a bounce.
     public float maxWallNormalY = 0.5f;
     private bool sprint;
 
@@ -120,7 +120,7 @@ public class PlayerScript : MonoBehaviour
     }
 
     #region Collectible Speed Bonus
-    // Chaque collectible ajoute définitivement ce pourcentage de la vitesse de base
+    // Each collectible permanently adds this fraction of the base speed.
     public float speedBonusPerCollectible = 0.1f;
     private int collectibleCount;
     private float SpeedMultiplier => 1f + collectibleCount * speedBonusPerCollectible;

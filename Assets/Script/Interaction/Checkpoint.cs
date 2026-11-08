@@ -21,7 +21,7 @@ public class Checkpoint : MonoBehaviour
             animator.enabled = false;
 
         if (checkpointActivate == null)
-            Debug.LogError("Assigne le clip CheckpointActivate au checkpoint.", this);
+            Debug.LogError("Assign the CheckpointActivate clip to the checkpoint.", this);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -44,7 +44,7 @@ public class Checkpoint : MonoBehaviour
 
         if (checkpointActivate == null)
         {
-            Debug.LogError("Impossible d'activer le checkpoint sans clip d'animation.", this);
+            Debug.LogError("Cannot activate the checkpoint without an animation clip.", this);
             return;
         }
 

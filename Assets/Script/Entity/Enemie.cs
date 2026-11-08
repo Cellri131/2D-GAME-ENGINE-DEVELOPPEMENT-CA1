@@ -1,9 +1,11 @@
 using UnityEngine;
 
-//thanks to 3D game Engine dev courses
+// Based on the 3D Game Engine Development course.
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class Enemie : MonoBehaviour
 {
+    #region Configuration and State
+
     [SerializeField, Min(0f)] private float speed = 2f;
     [SerializeField] private Transform pathParent;
 
@@ -16,6 +18,10 @@ public class Enemie : MonoBehaviour
 
     public bool IsActivated => isActivated;
 
+    #endregion
+
+    #region Initialization
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -24,16 +30,17 @@ public class Enemie : MonoBehaviour
 
         Animator animator = GetComponent<Animator>();
         if (animator.runtimeAnimatorController == null || !animator.HasState(0, Animator.StringToHash("CatFight")))
-            Debug.LogError("L'Animator doit contenir l'etat CatFight.", this);
+            Debug.LogError("The Animator must contain the CatFight state.", this);
         else
             animator.Play("CatFight");
 
         if (pathParent == null || pathParent.IsChildOf(transform) || pathParent.childCount == 0)
         {
-            Debug.LogError("Assigne un objet de chemin non vide et independant de l'ennemi.", this);
+            Debug.LogError("Assign a non-empty path object outside the enemy hierarchy.", this);
             return;
         }
 
+        // Index points by number rather than hierarchy order and reject missing or duplicate indices.
         path = new Transform[pathParent.childCount];
         foreach (Transform point in pathParent)
         {
@@ -43,7 +50,7 @@ public class Enemie : MonoBehaviour
                 number < 1 || number > path.Length || name != "P" + number ||
                 path[number - 1] != null)
             {
-                Debug.LogError("Le chemin doit contenir exactement les points P1, P2, ... sans doublon.", this);
+                Debug.LogError("The path must contain exactly P1, P2, ... with no duplicates or gaps.", this);
                 return;
             }
             path[number - 1] = point;
@@ -51,6 +58,10 @@ public class Enemie : MonoBehaviour
 
         pathIsValid = true;
     }
+
+    #endregion
+
+    #region Patrol
 
     private void FixedUpdate()
     {
@@ -61,6 +72,7 @@ public class Enemie : MonoBehaviour
         Vector2 position = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
         rb.MovePosition(position);
 
+        // Return to P1 after the last point without teleporting.
         if (position == target)
             nextPoint = (nextPoint + 1) % path.Length;
     }
@@ -76,6 +88,10 @@ public class Enemie : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
         nextPoint = 0;
     }
+
+    #endregion
+
+    #region Player Contact
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -96,4 +112,6 @@ public class Enemie : MonoBehaviour
         ReturnToStart();
         player.TakeDamage();
     }
+
+    #endregion
 }

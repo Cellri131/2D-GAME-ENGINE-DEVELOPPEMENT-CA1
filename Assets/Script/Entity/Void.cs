@@ -7,7 +7,7 @@ public class Void : MonoBehaviour
     private void Awake()
     {
         if (catFight == null)
-            Debug.LogError("Assigne l'ennemi CatFight au Void.", this);
+            Debug.LogError("Assign the CatFight enemy to the Void.", this);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -29,7 +29,7 @@ public class Void : MonoBehaviour
         if (catFight != null)
             catFight.ReturnToStart();
         else
-            Debug.LogError("Impossible de remettre CatFight au depart : aucun ennemi assigne.", this);
+            Debug.LogError("Cannot return CatFight to its starting position: no enemy assigned.", this);
 
         player.TakeDamage();
     }

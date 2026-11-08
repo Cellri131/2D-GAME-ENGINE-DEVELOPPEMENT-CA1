@@ -8,9 +8,9 @@ public class VilanActivation : MonoBehaviour
     private void Awake()
     {
         if (enemy == null)
-            Debug.LogError("Assigne l'ennemi a la zone d'activation.", this);
+            Debug.LogError("Assign the enemy to the activation zone.", this);
         if (!GetComponent<BoxCollider2D>().isTrigger)
-            Debug.LogError("Active Is Trigger sur le BoxCollider2D de la zone d'activation.", this);
+            Debug.LogError("Enable Is Trigger on the activation zone's BoxCollider2D.", this);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

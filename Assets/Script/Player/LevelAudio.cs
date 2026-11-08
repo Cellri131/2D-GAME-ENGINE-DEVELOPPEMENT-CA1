@@ -26,7 +26,7 @@ public class LevelAudio : MonoBehaviour
 
         if (ambientSound == null || pursuitSound == null || collectibleSound == null ||
             catFightSound == null || hitSound == null || catFight == null)
-            Debug.LogError("Assigne tous les sons et l'ennemi CatFight au composant LevelAudio.", this);
+            Debug.LogError("Assign all sounds and the CatFight enemy to the LevelAudio component.", this);
     }
 
     private void Start()

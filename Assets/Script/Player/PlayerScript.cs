@@ -48,6 +48,17 @@ public class PlayerScript : MonoBehaviour
         lastPosition = rb.transform.position;
     }
 
+    private void Start()
+    {
+        // Initialize UI values at the start of the game
+        if (GameUIManager.Instance != null)
+        {
+            GameUIManager.Instance.UpdateLives(lives);
+            GameUIManager.Instance.UpdateCollectibles(collectibleCount);
+        }
+    }
+
+
     private void Update()
     {
         mx = Input.GetAxisRaw("Horizontal");
@@ -116,6 +127,12 @@ public class PlayerScript : MonoBehaviour
     public void AddCollectible()
     {
         collectibleCount++;
+
+        // Update UI collectible counter
+        if (GameUIManager.Instance != null)
+        {
+            GameUIManager.Instance.UpdateCollectibles(collectibleCount);
+        }
     }
 
     #endregion
@@ -168,7 +185,12 @@ public class PlayerScript : MonoBehaviour
     {
         lives--;
         Debug.Log(lives);
-        // gameManager.UpdateLives(lives);
+
+        if (GameUIManager.Instance != null)
+        {
+            GameUIManager.Instance.UpdateLives(lives);
+        }
+
         rb.position = lastPosition;
         rb.linearVelocity = Vector2.zero;
         bounceTimer = 0f;

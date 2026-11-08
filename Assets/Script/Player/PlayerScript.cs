@@ -21,14 +21,6 @@ public class PlayerScript : MonoBehaviour
 
     // Pente
     private Vector2 groundNormal = Vector2.up;
-    #endregion
-
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
-    }
 
     private int direction = 1;
     private Vector2 lastVelocity;
@@ -37,6 +29,15 @@ public class PlayerScript : MonoBehaviour
     // Les surfaces dont la normale a un y au-dessus de cette valeur (rampes) ne font pas rebondir
     public float maxWallNormalY = 0.5f;
     private bool sprint;
+    
+    #endregion
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+    }
 
     private void Update()
     {
@@ -65,7 +66,7 @@ public class PlayerScript : MonoBehaviour
             bounceTimer -= Time.fixedDeltaTime;
         else
         {
-            float speed = sprint ? movementSpeed + sprintSpeed : movementSpeed;
+            float speed = (sprint ? movementSpeed + sprintSpeed : movementSpeed) * SpeedMultiplier;
             rb.linearVelocity = new Vector2(mx * speed, rb.linearVelocity.y);
         }
 
@@ -96,6 +97,19 @@ public class PlayerScript : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, 0f, angle);
         }
     }
+
+    #region Collectible Speed Bonus
+    // Chaque collectible ajoute définitivement ce pourcentage de la vitesse de base
+    public float speedBonusPerCollectible = 0.1f;
+    private int collectibleCount;
+    private float SpeedMultiplier => 1f + collectibleCount * speedBonusPerCollectible;
+
+    public void AddCollectible()
+    {
+        collectibleCount++;
+    }
+
+    #endregion
 
     void Jump()
     {

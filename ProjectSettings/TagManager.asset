@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Tileset
   - Ground
+  - Object
   layers:
   - Default
   - TransparentFX
@@ -14,7 +15,7 @@ TagManager:
   - Water
   - UI
   - PlayerLayer
-  - 
+  - Object
   - Ground
   - 
   - 
@@ -60,6 +61,9 @@ TagManager:
     locked: 0
   - name: Player_And_Ground
     uniqueID: 2730719571
+    locked: 0
+  - name: Object
+    uniqueID: 3683754083
     locked: 0
   m_RenderingLayers:
   - Default
